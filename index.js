@@ -193,12 +193,12 @@ app.get('/stocks/sort/pricing', (req, res) => {
 // Endpoint 2: Get the stocks sorted based on their Growth.
 
 app.get('/stocks/sort/growth', (req, res) => {
-  let growthRate = req.query.growthRate;
+  let growth = req.query.growth;
   let stocksCopy = stocks.slice();
   stocksCopy.sort(function (stock1, stock2) {
-    if (growthRate === 'high-to-low') {
+    if (growth === 'high-to-low') {
       return stock2.growth - stock1.growth;
-    } else if (growthRate === 'low-to-high') {
+    } else if (growth === 'low-to-high') {
       return stock1.growth - stock2.growth;
     } else {
       return 0;

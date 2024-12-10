@@ -173,8 +173,8 @@ let stocks = [
 
 // Endpoint 1: Get the stocks sorted by pricing
 
-app.get('/stocks/sort/pricing/:pricing', (req, res) => {
-  let pricing = req.params.pricing;
+app.get('/stocks/sort/pricing', (req, res) => {
+  let pricing = req.query.pricing;
   let stocksCopy = stocks.slice();
 
   stocksCopy.sort(function (stock1, stock2) {
@@ -192,8 +192,8 @@ app.get('/stocks/sort/pricing/:pricing', (req, res) => {
 
 // Endpoint 2: Get the stocks sorted based on their Growth.
 
-app.get('/stocks/sort/growthRate/:growthRate', (req, res) => {
-  let growthRate = req.params.growthRate;
+app.get('/stocks/sort/growth', (req, res) => {
+  let growthRate = req.query.growthRate;
   let stocksCopy = stocks.slice();
   stocksCopy.sort(function (stock1, stock2) {
     if (growthRate === 'high-to-low') {
@@ -215,8 +215,8 @@ function filterByExchange(stock, exchange) {
   return stock.exchange.toLowerCase() === exchange;
 }
 
-app.get('/stocks/filter/exchange/:exchange', (req, res) => {
-  let exchange = req.params.exchange.toLowerCase();
+app.get('/stocks/filter/exchange', (req, res) => {
+  let exchange = req.query.exchange.toLowerCase();
 
   let sortedStocks = stocks.filter(stock => filterByExchange(stock, exchange));
   res.json({ stocks: sortedStocks });
@@ -228,8 +228,8 @@ function filterByIndustry(stock, industry) {
   return stock.industry.toLowerCase() === industry;
 }
 
-app.get('/stocks/filter/industry/:industry', (req, res) => {
-  let industry = req.params.industry.toLowerCase();
+app.get('/stocks/filter/industry', (req, res) => {
+  let industry = req.query.industry.toLowerCase();
 
   let sortedStocks = stocks.filter(stock => filterByIndustry(stock, industry));
   res.json({ stocks: sortedStocks });
